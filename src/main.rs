@@ -5,7 +5,7 @@ extern crate winapi;
 mod mensagem;
 pub use self::mensagem::cx_msg;
 use imagesize::size;
-use std::cmp::Ordering;
+use std::cmp::Ordering::*;
 use std::env;
 
 const ROTULO: &str = "Verificar o tamanho da foto...";
@@ -44,12 +44,12 @@ impl VerTam {
     }
     fn comparar(&mut self) -> &Self {
         match self.dimensoes.0.cmp(&self.dimensoes.1) {
-            Ordering::Greater => {
+            Greater => {
                 self.dimensoes = (self.dimensoes.1, self.dimensoes.0);
                 self.calcular();
             }
-            Ordering::Less => self.resposta = self.calcular(),
-            Ordering::Equal => self.resposta = "quadrado.",
+            Less => self.resposta = self.calcular(),
+            Equal => self.resposta = "quadrado.",
         }
         self
     }
